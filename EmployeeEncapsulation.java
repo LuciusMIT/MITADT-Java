@@ -1,4 +1,4 @@
-public class Employee {
+class Employee {
     private String name;
     private String address;
     private double salary;
@@ -43,51 +43,57 @@ public class Employee {
         this.jobTitle = jobTitle;
     }
 
-    public int calculateBonus() {
-        return (int) (salary * 0.1);
+    public double calculateBonus() {
+        return salary * 0.10; 
     }
 
-    public String generatePerformanceReport() {
-        return "Performance report for " + name + ": Good performance.";
+    public void generatePerformanceReport() {
+        System.out.println("Performance report for " + name + " (" + jobTitle + "):");
+        System.out.println("Salary: $" + salary);
+        System.out.println("Address: " + address);
+        System.out.println("Job Title: " + jobTitle);
+        System.out.println("Bonus: $" + calculateBonus());
     }
 }
 
 class Manager extends Employee {
-    private int numberOfReports;
+    private String department;
 
-    public Manager(String name, String address, double salary, int numberOfReports) {
-        super(name, address, salary, "Manager");
-        this.numberOfReports = numberOfReports;
+    public Manager(String name, String address, double salary, String jobTitle, String department) {
+        super(name, address, salary, jobTitle);
+        this.department = department;
     }
 
-    public int getNumberOfReports() {
-        return numberOfReports;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setNumberOfReports(int numberOfReports) {
-        this.numberOfReports = numberOfReports;
-    }
-
-    @Override
-    public int calculateBonus() {
-        return (int) (getSalary() * 0.15);
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     @Override
-    public String generatePerformanceReport() {
-        return "Performance report for " + getName() + ": Excellent leadership skills.";
+    public double calculateBonus() {
+        return getSalary() * 0.15; // Higher bonus for managers
     }
 
-    public void manageProjects() {
-        System.out.println(getName() + " is managing projects.");
+    @Override
+    public void generatePerformanceReport() {
+        super.generatePerformanceReport();
+        System.out.println("Department: " + department);
+        System.out.println("Management-level bonus: $" + calculateBonus());
+    }
+
+    public void manageProject() {
+        System.out.println("Managing project for department: " + department);
     }
 }
 
 class Developer extends Employee {
     private String programmingLanguage;
 
-    public Developer(String name, String address, double salary, String programmingLanguage) {
-        super(name, address, salary, "Developer");
+    public Developer(String name, String address, double salary, String jobTitle, String programmingLanguage) {
+        super(name, address, salary, jobTitle);
         this.programmingLanguage = programmingLanguage;
     }
 
@@ -100,70 +106,37 @@ class Developer extends Employee {
     }
 
     @Override
-    public int calculateBonus() {
-        return (int) (getSalary() * 0.12);
+    public double calculateBonus() {
+        return getSalary() * 0.12; // Slightly higher bonus for developers
     }
 
     @Override
-    public String generatePerformanceReport() {
-        return "Performance report for " + getName() + ": Strong coding skills in " + programmingLanguage + ".";
+    public void generatePerformanceReport() {
+        super.generatePerformanceReport();
+        System.out.println("Programming Language: " + programmingLanguage);
+        System.out.println("Developer-level bonus: $" + calculateBonus());
     }
 
-    public void workOnProjects() {
-        System.out.println(getName() + " is developing software in " + programmingLanguage + ".");
-    }
-}
-
-class Programmer extends Employee {
-    private String mainSkill;
-
-    public Programmer(String name, String address, double salary, String mainSkill) {
-        super(name, address, salary, "Programmer");
-        this.mainSkill = mainSkill;
-    }
-
-    public String getMainSkill() {
-        return mainSkill;
-    }
-
-    public void setMainSkill(String mainSkill) {
-        this.mainSkill = mainSkill;
-    }
-
-    @Override
-    public int calculateBonus() {
-        return (int) (getSalary() * 0.1);
-    }
-
-    @Override
-    public String generatePerformanceReport() {
-        return "Performance report for " + getName() + ": Good problem-solving skills in " + mainSkill + ".";
-    }
-
-    public void assistInProjects() {
-        System.out.println(getName() + " is assisting with project tasks using their main skill in " + mainSkill + ".");
+    public void developFeature() {
+        System.out.println("Developing a new feature using " + programmingLanguage);
     }
 }
 
 public class Main {
     public static void main(String[] args) {
-        Manager manager = new Manager("Alice", "123 Street, Dehradun", 80000, 5);
-        Developer developer = new Developer("Bob", "456 Road, Dehradun", 70000, "Java");
-        Programmer programmer = new Programmer("Charlie", "789 Avenue, Dehradun", 60000, "Problem-solving");
+        Employee e1 = new Employee("John Doe", "123 Elm St", 50000, "Software Engineer");
+        Manager m1 = new Manager("Jane Smith", "456 Oak St", 80000, "Project Manager", "IT");
+        Developer d1 = new Developer("Alice Brown", "789 Pine St", 70000, "Software Developer", "Java");
 
-        System.out.println("Manager: " + manager.getName());
-        System.out.println("Bonus: " + manager.calculateBonus());
-        System.out.println(manager.generatePerformanceReport());
-        manager.manageProjects();
+        System.out.println("Employee 1 Details:");
+        e1.generatePerformanceReport();
 
-        System.out.println("\nDeveloper: " + developer.getName());
-        System.out.println("Bonus: " + developer.calculateBonus());
-        System.out.println(developer.generatePerformanceReport());
-        developer.workOnProjects();
+        System.out.println("\nManager 1 Details:");
+        m1.generatePerformanceReport();
+        m1.manageProject();
 
-        System.out.println("\nProgrammer: " + programmer.getName());
-        System.out.println("Bonus: " + programmer.calculateBonus());
-        System.out.println(programmer.generatePerformanceReport());
-        programmer.assistInProjects();
+        System.out.println("\nDeveloper 1 Details:");
+        d1.generatePerformanceReport();
+        d1.developFeature();
     }
 }
