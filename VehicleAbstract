@@ -1,0 +1,65 @@
+abstract class Vehicle {
+    int speed;
+    double fuelCapacity;
+
+    public Vehicle(int speed, double fuelCapacity) {
+        this.speed = speed;
+        this.fuelCapacity = fuelCapacity;
+    }
+
+    abstract double calculateRange();
+}
+
+class Car extends Vehicle {
+    double fuelEfficiency; // in km per liter
+
+    public Car(int speed, double fuelCapacity, double fuelEfficiency) {
+        super(speed, fuelCapacity);
+        this.fuelEfficiency = fuelEfficiency;
+    }
+
+    @Override
+    double calculateRange() {
+        return fuelCapacity * fuelEfficiency;
+    }
+}
+
+class Motorcycle extends Vehicle {
+    double fuelEfficiency; // in km per liter
+
+    public Motorcycle(int speed, double fuelCapacity, double fuelEfficiency) {
+        super(speed, fuelCapacity);
+        this.fuelEfficiency = fuelEfficiency;
+    }
+
+    @Override
+    double calculateRange() {
+        return fuelCapacity * fuelEfficiency;
+    }
+}
+
+class Truck extends Vehicle {
+    double fuelEfficiency; // in km per liter
+
+    public Truck(int speed, double fuelCapacity, double fuelEfficiency) {
+        super(speed, fuelCapacity);
+        this.fuelEfficiency = fuelEfficiency;
+    }
+
+    @Override
+    double calculateRange() {
+        return fuelCapacity * fuelEfficiency;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Vehicle car = new Car(120, 50, 15);
+        Vehicle motorcycle = new Motorcycle(100, 15, 30);
+        Vehicle truck = new Truck(80, 200, 5);
+
+        System.out.println("Car range: " + car.calculateRange() + " km");
+        System.out.println("Motorcycle range: " + motorcycle.calculateRange() + " km");
+        System.out.println("Truck range: " + truck.calculateRange() + " km");
+    }
+}
