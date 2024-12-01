@@ -1,0 +1,101 @@
+class LibraryItem {
+    String title;
+    String author;
+    int publicationYear;
+
+    public LibraryItem(String title, String author, int publicationYear) {
+        this.title = title;
+        this.author = author;
+        this.publicationYear = publicationYear;
+    }
+
+    public void checkOutItem() {
+        System.out.println(title + " has been checked out.");
+    }
+
+    public void returnItem() {
+        System.out.println(title + " has been returned.");
+    }
+
+    public int calculateLateFee(int daysLate) {
+        return 0;
+    }
+
+    public void displayDetails() {
+        System.out.println("Title: " + title + ", Author: " + author + ", Publication Year: " + publicationYear);
+    }
+}
+
+class Book extends LibraryItem {
+    public Book(String title, String author, int publicationYear) {
+        super(title, author, publicationYear);
+    }
+
+    @Override
+    public int calculateLateFee(int daysLate) {
+        return daysLate * 1;
+    }
+
+    @Override
+    public void displayDetails() {
+        super.displayDetails();
+        System.out.println("Item type: Book");
+    }
+}
+
+class Magazine extends LibraryItem {
+    public Magazine(String title, String author, int publicationYear) {
+        super(title, author, publicationYear);
+    }
+
+    @Override
+    public int calculateLateFee(int daysLate) {
+        return daysLate * 2;
+    }
+
+    @Override
+    public void displayDetails() {
+        super.displayDetails();
+        System.out.println("Item type: Magazine");
+    }
+}
+
+class DVD extends LibraryItem {
+    public DVD(String title, String author, int publicationYear) {
+        super(title, author, publicationYear);
+    }
+
+    @Override
+    public int calculateLateFee(int daysLate) {
+        return daysLate * 3;
+    }
+
+    @Override
+    public void displayDetails() {
+        super.displayDetails();
+        System.out.println("Item type: DVD");
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Book book = new Book("The Great Gatsby", "F. Scott Fitzgerald", 1925);
+        Magazine magazine = new Magazine("National Geographic", "Various", 2023);
+        DVD dvd = new DVD("Inception", "Christopher Nolan", 2010);
+
+        book.displayDetails();
+        book.checkOutItem();
+        System.out.println("Late fee for 5 days: $" + book.calculateLateFee(5));
+        book.returnItem();
+
+        magazine.displayDetails();
+        magazine.checkOutItem();
+        System.out.println("Late fee for 3 days: $" + magazine.calculateLateFee(3));
+        magazine.returnItem();
+
+        dvd.displayDetails();
+        dvd.checkOutItem();
+        System.out.println("Late fee for 7 days: $" + dvd.calculateLateFee(7));
+        dvd.returnItem();
+    }
+}
